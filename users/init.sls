@@ -27,13 +27,13 @@ users_group_present_{{ group }}:
 {%- if user == None -%}
 {%- set user = {} -%}
 {%- endif -%}
-{%- if 'sudoonly' in user and user['sudoonly'] %}
+{%- if user.get('sudoonly', False) and user['sudoonly'] %}
 {%- set _dummy=user.update({'sudouser': True}) %}
 {%- endif %}
-{%- if 'sudouser' in user and user['sudouser'] %}
+{%- if user.get('sudouser', False) and user['sudouser'] %}
 {%- do used_sudo.append(1) %}
 {%- endif %}
-{%- if 'google_auth' in user %}
+{%- if user.get('google_auth', False) %}
 {%- do used_googleauth.append(1) %}
 {%- endif %}
 {%- if salt['pillar.get']('users:' ~ name ~ ':user_files:enabled', False) %}

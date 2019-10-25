@@ -1,6 +1,6 @@
 {% from "users/map.jinja" import users with context %}
 
-{% if users.use_vim_formula %}
+{% if users.get('use_vim_formula', False) %}
 
 include:
   - users
